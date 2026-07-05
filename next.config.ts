@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    vercelToolbar: false,
-  },
+  devIndicators: false,
 };
 
 export default nextConfig;
