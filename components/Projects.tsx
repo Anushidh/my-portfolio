@@ -143,7 +143,7 @@ const projects: Project[] = [
       { label: "Frontend", href: "https://github.com/Anushidh/JOB-PLATFORM-FRONTEND" },
       { label: "Backend",  href: "https://github.com/Anushidh/JOB-PLATFORM-BACKEND" },
     ],
-    demo: "https://careerhub-portal.vercel.app",
+    demo: undefined,
     accentColor: "#0F766E",
   },
   {
@@ -195,7 +195,7 @@ const projects: Project[] = [
       { label: "Frontend", href: "https://github.com/Anushidh/SOCIAL-MEDIA-FRONTEND" },
       { label: "Backend",  href: "https://github.com/Anushidh/SOCIAL-MEDIA-BACKEND" },
     ],
-    demo: "https://your-app.vercel.app",
+    demo: undefined,
     accentColor: "#0F766E",
   },
 ];
