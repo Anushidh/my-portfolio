@@ -143,7 +143,7 @@ const projects: Project[] = [
       { label: "Frontend", href: "https://github.com/Anushidh/JOB-PLATFORM-FRONTEND" },
       { label: "Backend",  href: "https://github.com/Anushidh/JOB-PLATFORM-BACKEND" },
     ],
-    demo: undefined,
+    demo: "https://hireflow-demo-placeholder.vercel.app",
     accentColor: "#0F766E",
   },
   {
@@ -195,7 +195,7 @@ const projects: Project[] = [
       { label: "Frontend", href: "https://github.com/Anushidh/SOCIAL-MEDIA-FRONTEND" },
       { label: "Backend",  href: "https://github.com/Anushidh/SOCIAL-MEDIA-BACKEND" },
     ],
-    demo: undefined,
+    demo: "https://social-media-frontend-six-chi.vercel.app",
     accentColor: "#0F766E",
   },
 ];
