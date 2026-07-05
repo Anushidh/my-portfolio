@@ -106,6 +106,13 @@ code, pre, kbd {
   background-color: color-mix(in srgb, var(--color-accent) 4%, var(--color-surface)) !important;
 }
 
+.not-found-btn {
+  transition: opacity 0.2s ease;
+}
+.not-found-btn:hover {
+  opacity: 0.85;
+}
+
 .nav-link {
   transition: color 0.2s ease;
 }

@@ -69,6 +69,7 @@ export default function NotFound() {
         {/* CTA */}
         <Link
           href="/"
+          className="not-found-btn"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -81,10 +82,7 @@ export default function NotFound() {
             color: "#FFFFFF",
             borderRadius: "8px",
             textDecoration: "none",
-            transition: "opacity 0.2s ease",
           }}
-          onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.85")}
-          onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = "1")}
         >
           ← Back home
         </Link>
