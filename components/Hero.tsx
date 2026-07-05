@@ -41,21 +41,21 @@ const socialLinks = [
     isBrand: false,
   },
   {
-    href: "https://github.com/anushidh",
+    href: "https://github.com/Anushidh",
     label: "GitHub",
     icon: GithubIcon,
     external: true,
     isBrand: true,
   },
   {
-    href: "https://linkedin.com/in/anushidh",
+    href: "https://www.linkedin.com/in/anushidh-a-p-9a4367326",
     label: "LinkedIn",
     icon: LinkedinIcon,
     external: true,
     isBrand: true,
   },
   {
-    href: "mailto:hello@anushidh.dev",
+    href: "mailto:anushidh101@gmail.com",
     label: "Email",
     icon: Mail,
     external: false,
@@ -140,7 +140,7 @@ export default function Hero() {
         }}
       >
         I build scalable web applications with React, Angular, NestJS, Express,
-        TypeScript, and MongoDB.
+        Fastify, TypeScript, MongoDB, and PostgreSQL.
       </motion.p>
 
       <motion.p

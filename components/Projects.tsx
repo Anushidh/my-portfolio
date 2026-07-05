@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
 import FadeIn from "./FadeIn";
 import SectionDivider from "./SectionDivider";
 import TechBadge from "./TechBadge";
@@ -27,141 +30,172 @@ interface Project {
   keyFeatures: string[];
   lessons: string;
   metrics: ProjectMetric[];
-  github: string;
+  github?: string;
+  githubRepos?: { label: string; href: string }[];
   demo?: string;
   accentColor?: string;
 }
 
 const projects: Project[] = [
   {
-    title: "Pulse Commerce",
-    tagline: "Modern full-stack e-commerce platform",
+    title: "Wearhaus",
+    tagline: "Full stack e-commerce platform for a clothing store",
     description:
-      "A production-ready e-commerce platform built to handle real-world complexity — from multi-tier authentication to real-time inventory management and order tracking.",
+      "A production-ready e-commerce platform covering the full shopping lifecycle — browse, cart, checkout, payments, order tracking, returns, and an admin dashboard with analytics. Built with a modern TypeScript stack and designed to handle real-world edge cases correctly.",
     stack: [
       "React",
       "TypeScript",
+      "Vite",
       "Express",
       "MongoDB",
-      "JWT",
       "Redis",
-      "Cloudinary",
+      "JWT",
       "Razorpay",
+      "Cloudinary",
+      "Zustand",
+      "TanStack Query",
     ],
     problem:
-      "Most e-commerce tutorials stop at a simple product list and checkout. I wanted to build something that reflected what a real platform needs: inventory that tracks across concurrent purchases, coupons with usage limits, a wallet system that handles refunds, and an admin dashboard that gives operators actual insight into the business.",
+      "Most e-commerce tutorials stop at a simple product list and checkout. I wanted to build something that reflected what a real platform needs: atomic order placement across multiple resources, a wallet system that handles refunds and top-ups, coupons with race-condition-safe usage limits, and an admin dashboard that gives operators actual insight into the business.",
     architecture:
-      "The backend follows a layered service architecture — controllers handle request validation and routing, services contain business logic, and repositories abstract the database layer. Redis is used for session caching and rate limiting, reducing database read pressure significantly on high-traffic routes like the product catalog and user auth flow. Cloudinary handles all media transformations server-side before storage, keeping the client bundle lean.",
+      "The backend follows an MVC structure — routes, controllers, middleware, validators, and models — keeping each layer's responsibility clear. The frontend is organized into feature modules (auth, products, cart, orders, admin), with a shared layer for the API client, stores, and reusable components. Server state is managed by TanStack Query and local UI state by Zustand, keeping data-fetching logic out of components entirely.",
     challenges:
-      "The hardest part was building the inventory reservation system. Between a user adding an item to cart and completing checkout, stock can be reserved by multiple concurrent sessions. I solved this with optimistic locking in MongoDB — using version fields to detect and retry conflicts — combined with a Redis-backed TTL for cart reservations that automatically releases held inventory if checkout isn't completed.",
+      "Order placement runs inside a single MongoDB transaction — stock, coupon usage, wallet debit, and cart clearing either all commit or all roll back, with no partial state ever persisted. All monetary arithmetic uses Decimal.js throughout to avoid floating-point drift in discounts, totals, tax, and wallet calculations. On the frontend, the axios interceptor handles concurrent 401s with a queue and an in-flight lock so only one token refresh fires regardless of how many requests fail simultaneously.",
     keyFeatures: [
-      "JWT authentication with refresh token rotation",
-      "Advanced product catalog with multi-faceted filtering",
-      "Wishlist, cart, and session persistence",
-      "Coupon engine with usage limits and expiry",
-      "Wallet system with refund workflows",
-      "Real-time inventory management with conflict resolution",
-      "Admin dashboard with sales analytics",
-      "Order tracking with status transitions",
-      "PDF invoice generation",
-      "Comprehensive review and rating system",
-      "Responsive across all device sizes",
+      "JWT access tokens (15 min) + HttpOnly cookie refresh rotation via Redis",
+      "Google OAuth 2.0 with existing-account linking",
+      "Atomic order placement with MongoDB transactions",
+      "Three payment methods: Razorpay, Wallet, Cash on Delivery",
+      "Razorpay payment retry for failed/pending orders",
+      "Wallet with top-up, refunds, and idempotency checks",
+      "Coupon engine with global + per-user usage limits",
+      "Product + category offer system with best-offer selection",
+      "Full-text search with multi-faceted filters",
+      "Order cancellation and 15-day return window enforcement",
+      "PDF invoice generation (PDFKit) emailed to customer",
+      "Admin dashboard — revenue stats, charts, top products",
+      "Stale order cleanup cron job (auto-cancel unpaid Razorpay orders)",
+      "Cart abandonment detection with reminder emails",
+      "Referral system with atomic wallet reward on first delivery",
     ],
     lessons:
-      "I learned that payment integration is as much about failure handling as success handling. Razorpay's webhook system needed idempotency keys, retry logic, and careful state management to avoid double-processing. Building that correctly the first time made the rest of the payment flow much simpler.",
+      "The concurrent 401 case in the axios interceptor — queue and in-flight lock — was the most subtle piece to get right. And Decimal.js needs to be in from day one; floating-point drift in financial calculations is silent and painful to untangle after the fact.",
     metrics: [
       { label: "API endpoints", value: "60+" },
-      { label: "Database collections", value: "12" },
-      { label: "Auth layers", value: "3" },
+      { label: "DB collections", value: "12" },
+      { label: "Payment methods", value: "3" },
     ],
-    github: "https://github.com/anushidh/pulse-commerce",
-    demo: "https://pulse-commerce.vercel.app",
+    githubRepos: [
+      { label: "Frontend", href: "https://github.com/Anushidh/E-COMMERCE-FRONTEND" },
+      { label: "Backend",  href: "https://github.com/Anushidh/E-COMMERCE-BACKEND" },
+    ],
+    demo: "https://wearhaus.vercel.app",
     accentColor: "#0F766E",
   },
   {
-    title: "CareerHub",
-    tagline: "Modern job portal with role-based access",
+    title: "HireFlow",
+    tagline: "Full-stack job platform with AI-powered hiring tools",
     description:
-      "A full-featured job portal connecting candidates and employers, with separate dashboards, resume management, and a notification system designed for real-world hiring workflows.",
+      "A production-grade job marketplace connecting job seekers and employers, with AI-assisted cover letters, resume parsing, job match scoring, tiered subscriptions, real-time messaging, and a full admin panel.",
     stack: [
       "React",
       "TypeScript",
+      "Vite",
       "Express",
       "MongoDB",
-      "JWT",
-      "Cloudinary",
       "Redis",
+      "Socket.IO",
+      "Razorpay",
+      "Groq API",
+      "Zustand",
+      "TanStack Query",
     ],
     problem:
-      "Existing job portals often treat employer and candidate experiences as afterthoughts of the same interface. I wanted to build something where each role gets a genuinely different, purpose-built experience — employers managing job posts and reviewing pipelines, candidates tracking applications and saving opportunities.",
+      "Job platforms tend to be either too simple (just listings and apply buttons) or too bloated. I wanted to build the full lifecycle correctly — post moderation, application status workflows, subscription-gated features, AI tooling that's actually useful, and cron jobs that handle the boring-but-critical stuff like auto-expiring subscriptions and sending job alerts.",
     architecture:
-      "The API is structured around resource-based routing with role-aware middleware. A shared authentication layer issues different JWT claims based on role (candidate, employer, admin), and each route handler performs role validation before any business logic runs. State management on the frontend uses a combination of React Query for server state and Zustand for local UI state — keeping them cleanly separated prevents the data-fetching logic from leaking into component state.",
+      "The backend uses a Controllers → Services → Repositories → Models layered structure with manual dependency injection wired in a single container.ts — no DI framework, just explicit construction that keeps the entire dependency graph visible in one file. The frontend is split into lazy-loaded portals per role (employee, employer, admin). TanStack Query owns all server state, Zustand handles auth and short-lived UI state like AI drafts. Route guards enforce role-based access at the router level.",
     challenges:
-      "Pagination at scale was more nuanced than I expected. Offset-based pagination breaks under concurrent data changes — items shift between pages as new listings are added. I implemented cursor-based pagination for the main job feed, using a composite cursor of timestamp and ID to maintain stable ordering even as new jobs are posted during a browsing session.",
+      "Subscription entitlement enforcement was the trickiest design problem — hardcoding feature checks across controllers causes drift fast. Solved with a requireSubscription(feature) middleware factory that reads the user's plan from Redis-cached subscription data, keeping all entitlement logic in one place. Socket.IO rooms are keyed by userId rather than socket ID so all open tabs for a user receive the same notifications without duplication logic in controllers.",
     keyFeatures: [
-      "Dual-role JWT authentication (candidate / employer)",
-      "Employer dashboard: post management, applicant pipeline",
-      "Candidate dashboard: application tracker, saved jobs",
-      "Resume upload and cloud storage with Cloudinary",
-      "Full-text job search with filters",
-      "Cursor-based pagination for stable browsing",
-      "Company profile management",
-      "In-app notification system",
-      "Admin panel for platform oversight",
+      "JWT access + refresh rotation with Redis-backed revocation",
+      "Google and LinkedIn OAuth with role selection",
+      "OTP-gated registration — user row only created after verification",
+      "Four subscription tiers with feature entitlements via middleware",
+      "Razorpay billing with PDF invoice generation",
+      "AI cover letter generation per job posting",
+      "AI resume parsing — PDF upload auto-fills profile fields",
+      "AI job match scoring (employee ↔ job, employer ↔ applicant)",
+      "AI job description generator for employers",
+      "Real-time messaging with typing indicators",
+      "Job alerts — daily/weekly email digests from saved filters",
+      "Job analytics — views, clicks, applications with daily charts",
+      "Cron jobs: job alerts, subscription expiry, auto-close past-deadline jobs",
+      "Admin panel — user management, job moderation, revenue tracking",
     ],
     lessons:
-      "State management decisions made early have long tails. Mixing server state with local UI state in the same store created subtle synchronization bugs that were hard to trace. Separating them — React Query for anything from the API, Zustand for local-only UI — simplified the entire frontend significantly.",
+      "Manual dependency injection via a container.ts file is underrated. Having the entire wiring explicit in one place makes the dependency graph obvious and testing straightforward — no magic, no decorators, no surprises. I also learned that subscription entitlement logic needs to live in middleware, not scattered across controllers, or it becomes impossible to audit what each plan actually unlocks.",
     metrics: [
       { label: "User roles", value: "3" },
-      { label: "API endpoints", value: "45+" },
-      { label: "Filter dimensions", value: "8" },
+      { label: "DB models", value: "13" },
+      { label: "Subscription tiers", value: "4" },
     ],
-    github: "https://github.com/anushidh/careerhub",
+    githubRepos: [
+      { label: "Frontend", href: "https://github.com/Anushidh/JOB-PLATFORM-FRONTEND" },
+      { label: "Backend",  href: "https://github.com/Anushidh/JOB-PLATFORM-BACKEND" },
+    ],
     demo: "https://careerhub-portal.vercel.app",
     accentColor: "#0F766E",
   },
   {
     title: "ConnectSphere",
-    tagline: "Modern social media platform with realtime communication",
+    tagline: "Full stack social media platform with real-time messaging",
     description:
-      "A full-featured social platform built with Angular and Node.js, featuring realtime chat, stories, a notification feed, and a rich content system — all designed around performance and low-latency communication.",
+      "A full-featured social platform built with Angular and NestJS, covering the complete social graph — posts, stories, nested comments, real-time chat, notifications, and a private account follow-request flow.",
     stack: [
       "Angular",
       "TypeScript",
-      "Node.js",
-      "Express",
-      "MongoDB",
+      "NestJS",
+      "PostgreSQL",
+      "TypeORM",
+      "Redis",
       "Socket.IO",
       "JWT",
       "Cloudinary",
+      "Passport.js",
     ],
     problem:
-      "I wanted to understand what it takes to build the realtime layer of a social platform correctly — not just making WebSockets work, but handling reconnection, presence, message delivery guarantees, and notification fanout at a reasonable scale. Most tutorials show a basic chat room; this project goes much deeper.",
+      "I wanted to build a social platform that handled the parts most tutorials skip — private accounts with approval flows, token refresh race conditions across parallel requests, WebSocket authentication without standard Passport guards, and real-time presence that works correctly across multiple tabs.",
     architecture:
-      "The realtime layer uses Socket.IO with room-based isolation — each user joins a personal room on authentication, and direct messages are routed through these rooms. Notifications are emitted server-side when relevant events occur (like a follow, comment, or mention) and consumed client-side through a persistent socket connection. The Angular frontend uses RxJS observables to subscribe to socket events and feed them into the UI reactively, avoiding manual DOM manipulation entirely.",
+      "The NestJS backend follows a layered structure — controllers handle HTTP, services contain business logic, and repositories handle data access via TypeORM. PostgreSQL is the primary store. Redis handles OTP storage with TTL (unverified registrations expire automatically), refresh token rotation, and session management. Real-time features use Socket.IO with separate namespaces for notifications and chat, with users joining personal rooms for targeted delivery.",
     challenges:
-      "Image optimization for social media content is deceptively complex. Profile pictures, post images, and story thumbnails all need different dimensions and quality settings. I built a server-side transformation pipeline using Cloudinary's transformation API — generating multiple variants on upload and storing only the transformation parameters, not the variants themselves. This kept storage costs low while keeping render quality high.",
+      "The token refresh race condition is a classic social media problem — multiple in-flight requests all returning 401 simultaneously, each trying to refresh independently. Solved by serialising the refresh in the interceptor so only one fires and the rest wait. Real-time presence across multiple tabs is another one: naive socket-per-tab approaches double-count online status, so presence is tracked per-user rather than per-connection. Cross-domain HttpOnly cookies between Vercel and Render also needed careful SameSite=none + CORS credentials configuration to work correctly.",
     keyFeatures: [
-      "JWT authentication with persistent sessions",
-      "Posts with likes, comments, and nested replies",
-      "Ephemeral stories with 24-hour expiry",
-      "Follow/unfollow system with feed personalization",
-      "Realtime one-to-one chat via Socket.IO",
-      "Realtime notification system with presence indicators",
-      "Infinite scroll feed with intersection observer",
-      "Profile customization and bio management",
-      "Media upload with server-side transformation",
-      "Bookmarks and content collections",
-      "@mention system in posts and comments",
+      "JWT access tokens + HttpOnly cookie refresh rotation via Redis",
+      "Google and Facebook OAuth",
+      "OTP email verification with Redis TTL (no unverified DB rows)",
+      "Follow / unfollow with private account approval flow",
+      "Block / unblock users",
+      "Posts with images, hashtags, likes, bookmarks, reposts",
+      "Nested comments (replies to comments)",
+      "24-hour ephemeral stories with view tracking",
+      "Real-time one-to-one chat with typing indicators and read receipts",
+      "Real-time notifications for likes, comments, follows, mentions",
+      "Online presence with multi-tab support",
+      "Search users and posts, hashtag pages, trending hashtags",
+      "Swagger API docs (60+ endpoints)",
     ],
     lessons:
-      "Realtime systems surface race conditions that synchronous code hides completely. A user could receive a notification, click it, and navigate to content that hasn't fully loaded yet. I had to build optimistic UI patterns carefully, ensuring the frontend always showed a loading state rather than an empty or stale view during those brief windows.",
+      "Private account logic needs to be enforced at the service layer, not just the UI — otherwise a determined user can hit the API directly and see posts they shouldn't. Notification fanout also compounds quickly: a post that gets 500 likes means 500 individual socket emits unless you batch or debounce. And Angular route ordering matters more than it looks — static routes like /post/create must come before dynamic ones like /post/:id, or Angular matches 'create' as an ID and loads the wrong component entirely.",
     metrics: [
-      { label: "Realtime events", value: "12 types" },
-      { label: "Socket rooms", value: "Per-user" },
-      { label: "Media variants", value: "Auto-generated" },
+      { label: "API endpoints", value: "60+" },
+      { label: "Socket namespaces", value: "2" },
+      { label: "Auth providers", value: "3" },
     ],
-    github: "https://github.com/anushidh/connectsphere",
+    githubRepos: [
+      { label: "Frontend", href: "https://github.com/Anushidh/SOCIAL-MEDIA-FRONTEND" },
+      { label: "Backend",  href: "https://github.com/Anushidh/SOCIAL-MEDIA-BACKEND" },
+    ],
+    demo: "https://your-app.vercel.app",
     accentColor: "#0F766E",
   },
 ];
@@ -173,12 +207,42 @@ function ProjectCard({
   project: Project;
   index: number;
 }) {
+  const tabs = [
+    { key: "architecture", label: "Architecture", content: project.architecture },
+    { key: "challenges",   label: "Challenges",   content: project.challenges },
+    { key: "lessons",      label: "Lessons",       content: project.lessons },
+  ] as const;
+
+  const [activeTab, setActiveTab] = useState<"architecture" | "challenges" | "lessons">("architecture");
+  const activeContent = tabs.find((t) => t.key === activeTab)!.content;
+  const [repoOpen, setRepoOpen] = useState(false);
+  const repoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!repoOpen) return;
+    function handleOutside(e: MouseEvent) {
+      if (repoRef.current && !repoRef.current.contains(e.target as Node)) {
+        setRepoOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleOutside);
+    return () => document.removeEventListener("mousedown", handleOutside);
+  }, [repoOpen]);
   return (
     <article
       style={{
         borderTop: "1px solid var(--color-border)",
         paddingTop: "4rem",
         paddingBottom: "4rem",
+        paddingLeft: "1.25rem",
+        borderLeft: "2px solid transparent",
+        transition: "border-color 0.25s ease, padding-left 0.25s ease",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.borderLeftColor = "var(--color-accent)";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.borderLeftColor = "transparent";
       }}
     >
       {/* Project number + title */}
@@ -299,39 +363,88 @@ function ProjectCard({
         </div>
       </FadeIn>
 
-      {/* Prose sections */}
-      {[
-        { heading: "The Problem", content: project.problem },
-        { heading: "Architecture", content: project.architecture },
-        { heading: "Challenges", content: project.challenges },
-        { heading: "Lessons Learned", content: project.lessons },
-      ].map((section, i) => (
-        <FadeIn key={section.heading} delay={0.05 * (i + 2)}>
-          <div style={{ marginBottom: "2rem" }}>
-            <h4
-              style={{
-                fontSize: "0.75rem",
-                fontFamily: "var(--font-mono)",
-                color: "var(--color-accent)",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                marginBottom: "0.75rem",
-              }}
-            >
-              {section.heading}
-            </h4>
-            <p
-              style={{
-                fontSize: "1.0625rem",
-                lineHeight: 1.8,
-                color: "var(--color-text-secondary)",
-              }}
-            >
-              {section.content}
-            </p>
+      {/* The Problem */}
+      <FadeIn delay={0.12}>
+        <div style={{ marginBottom: "2rem" }}>
+          <h4
+            style={{
+              fontSize: "0.75rem",
+              fontFamily: "var(--font-mono)",
+              color: "var(--color-accent)",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "0.75rem",
+            }}
+          >
+            The Problem
+          </h4>
+          <p
+            style={{
+              fontSize: "1.0625rem",
+              lineHeight: 1.8,
+              color: "var(--color-text-secondary)",
+            }}
+          >
+            {project.problem}
+          </p>
+        </div>
+      </FadeIn>
+
+      {/* Tabbed: Architecture / Challenges / Lessons */}
+      <FadeIn delay={0.16}>
+        <div style={{ marginBottom: "2.5rem" }}>
+          {/* Tab bar */}
+          <div
+            style={{
+              display: "flex",
+              gap: "0",
+              borderBottom: "1px solid var(--color-border)",
+              marginBottom: "1.5rem",
+            }}
+          >
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  style={{
+                    padding: "0.5rem 1rem",
+                    fontSize: "0.75rem",
+                    fontFamily: "var(--font-mono)",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    background: "none",
+                    border: "none",
+                    borderBottom: isActive
+                      ? "2px solid var(--color-accent)"
+                      : "2px solid transparent",
+                    color: isActive
+                      ? "var(--color-accent)"
+                      : "var(--color-text-muted)",
+                    cursor: "pointer",
+                    marginBottom: "-1px",
+                    transition: "color 0.15s ease, border-color 0.15s ease",
+                  }}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
           </div>
-        </FadeIn>
-      ))}
+
+          {/* Tab content */}
+          <p
+            style={{
+              fontSize: "1.0625rem",
+              lineHeight: 1.8,
+              color: "var(--color-text-secondary)",
+            }}
+          >
+            {activeContent}
+          </p>
+        </div>
+      </FadeIn>
 
       {/* Key Features */}
       <FadeIn delay={0.2}>
@@ -387,35 +500,118 @@ function ProjectCard({
 
       {/* Links */}
       <FadeIn delay={0.25}>
-        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.45rem",
-              padding: "0.55rem 1.1rem",
-              fontSize: "0.875rem",
-              fontFamily: "var(--font-body)",
-              fontWeight: 500,
-              color: "var(--color-text-secondary)",
-              border: "1px solid var(--color-border)",
-              borderRadius: "8px",
-              textDecoration: "none",
-            }}
-          >
-            <GithubIcon size={14} />
-            View Code
-          </a>
+        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
+
+          {/* Single github repo */}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+                padding: "0.55rem 1.1rem",
+                fontSize: "0.875rem",
+                fontFamily: "var(--font-body)",
+                fontWeight: 500,
+                color: "var(--color-text-secondary)",
+                border: "1px solid var(--color-border)",
+                borderRadius: "8px",
+                textDecoration: "none",
+              }}
+            >
+              <GithubIcon size={14} />
+              View Code
+            </a>
+          )}
+
+          {/* Split repos — dropdown */}
+          {project.githubRepos && (
+            <div ref={repoRef} style={{ position: "relative" }}>
+              <button
+                onClick={() => setRepoOpen((o) => !o)}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.45rem",
+                  padding: "0.55rem 1.1rem",
+                  fontSize: "0.875rem",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 500,
+                  color: "var(--color-text-secondary)",
+                  border: "1px solid var(--color-border)",
+                  borderRadius: "8px",
+                  background: "none",
+                  cursor: "pointer",
+                }}
+              >
+                <GithubIcon size={14} />
+                View Code
+                <svg
+                  width={12}
+                  height={12}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  style={{
+                    transform: repoOpen ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.15s ease",
+                  }}
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+
+              {repoOpen && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "calc(100% + 0.4rem)",
+                    left: 0,
+                    minWidth: "160px",
+                    backgroundColor: "var(--color-surface)",
+                    border: "1px solid var(--color-border)",
+                    borderRadius: "8px",
+                    overflow: "hidden",
+                    zIndex: 10,
+                  }}
+                >
+                  {project.githubRepos.map((repo, i) => (
+                    <a
+                      key={repo.label}
+                      href={repo.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setRepoOpen(false)}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.6rem",
+                        padding: "0.65rem 1rem",
+                        fontSize: "0.875rem",
+                        fontFamily: "var(--font-body)",
+                        color: "var(--color-text-secondary)",
+                        textDecoration: "none",
+                        borderBottom: i < project.githubRepos!.length - 1 ? "1px solid var(--color-border)" : "none",
+                      }}
+                    >
+                      <GithubIcon size={13} />
+                      {repo.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           {project.demo && (
             <a
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

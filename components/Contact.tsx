@@ -21,8 +21,8 @@ function LinkedinIcon({ size = 16 }: { size?: number }) {
 const contactLinks = [
   {
     label: "Email",
-    value: "hello@anushidh.dev",
-    href: "mailto:hello@anushidh.dev",
+    value: "anushidh101@gmail.com",
+    href: "mailto:anushidh101@gmail.com",
     icon: Mail,
   },
   {
@@ -34,8 +34,8 @@ const contactLinks = [
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/anushidh",
-    href: "https://linkedin.com/in/anushidh",
+    value: "linkedin.com/in/anushidh-a-p",
+    href: "https://www.linkedin.com/in/anushidh-a-p-9a4367326",
     icon: LinkedinIcon,
     external: true,
   },

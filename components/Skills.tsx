@@ -21,6 +21,7 @@ const skillCategories = [
     skills: [
       "Node.js",
       "Express",
+      "Fastify",
       "NestJS",
       "REST APIs",
       "GraphQL",
@@ -131,10 +132,12 @@ export default function Skills() {
         {skillCategories.map((cat, i) => (
           <FadeIn key={cat.category} delay={0.05 * i}>
             <div
+              className="skill-card"
               style={{
                 padding: "1.75rem 2rem",
                 backgroundColor: "var(--color-surface)",
                 height: "100%",
+                transition: "background-color 0.2s ease",
               }}
             >
               <h3

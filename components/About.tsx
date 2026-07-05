@@ -41,14 +41,7 @@ export default function About() {
         </div>
       </FadeIn>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1.4rem",
-        }}
-      >
-        <FadeIn delay={0.05}>
+      <FadeIn delay={0.05}>
           <p
             style={{
               fontSize: "1.0625rem",
@@ -56,86 +49,18 @@ export default function About() {
               color: "var(--color-text-secondary)",
             }}
           >
-            I didn&apos;t plan to become a software engineer. I stumbled into it
-            through curiosity — tinkering with small scripts, wondering how
-            websites actually worked under the hood. That curiosity never left.
-            What started as building simple static pages slowly grew into a deep
-            interest in the full stack: how data flows, how systems talk to each
-            other, how milliseconds of performance difference translate into real
-            user experience.
+            I stumbled into software through curiosity and never really stopped.
+            What began as tinkering with scripts grew into a genuine interest in
+            how systems are designed — how data flows, how services scale, how
+            small architectural decisions compound over time. On the backend I
+            think in layers: clean separation, maintainable code, schemas that
+            survive requirement changes. On the frontend I care about feel as
+            much as function — the spacing, the transitions, whether a component
+            communicates its intent without explanation. I believe good
+            engineering and good UX thinking are the same discipline, just
+            applied at different levels of the stack.
           </p>
         </FadeIn>
-
-        <FadeIn delay={0.1}>
-          <p
-            style={{
-              fontSize: "1.0625rem",
-              lineHeight: 1.85,
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            Backend engineering feels like architecture to me. Every API route,
-            every database schema, every caching decision is a small design
-            choice that compounds over time. I&apos;ve grown to love the
-            discipline of writing code that doesn&apos;t just work today, but is
-            readable and maintainable six months from now — when the codebase is
-            bigger, the team is different, and the requirements have evolved in
-            ways nobody predicted.
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={0.15}>
-          <p
-            style={{
-              fontSize: "1.0625rem",
-              lineHeight: 1.85,
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            On the frontend, I care deeply about the details. Not just making
-            things work, but making them feel right. The spacing between
-            elements. The timing of a transition. Whether a button communicates
-            clearly what it does without a tooltip. I&apos;ve spent a lot of
-            time with React and Angular, and I&apos;ve come to believe that good
-            frontend architecture and good UX thinking are inseparable — you
-            can&apos;t build one well without caring about the other.
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={0.2}>
-          <p
-            style={{
-              fontSize: "1.0625rem",
-              lineHeight: 1.85,
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            I&apos;m genuinely excited by scalable systems — how you design a
-            service that handles ten users and a million users with the same
-            codebase. I find myself thinking about caching strategies, queue
-            architectures, and horizontal scaling even when I&apos;m working on
-            smaller projects. These patterns matter, and understanding them early
-            tends to save painful rewrites later.
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={0.25}>
-          <p
-            style={{
-              fontSize: "1.0625rem",
-              lineHeight: 1.85,
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            Outside of work, I read about systems design, contribute to personal
-            projects that let me explore ideas I don&apos;t get to at work, and
-            occasionally write about things I&apos;ve learned. I believe the
-            best engineers are the ones who stay genuinely curious — not about
-            chasing every new framework, but about understanding the principles
-            underneath. That&apos;s what keeps the work interesting.
-          </p>
-        </FadeIn>
-      </div>
     </section>
   );
 }

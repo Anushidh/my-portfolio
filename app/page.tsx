@@ -8,6 +8,8 @@ import Writing from "@/components/Writing";
 import Philosophy from "@/components/Philosophy";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import WelcomeToast from "@/components/WelcomeToast";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
@@ -16,14 +18,16 @@ export default function Home() {
       <main>
         <Hero />
         <About />
+        <Experience />
         <Projects />
         <Skills />
-        <Experience />
-        <Writing />
+        {/* <Writing /> */}
         <Philosophy />
         <Contact />
       </main>
       <Footer />
+      <WelcomeToast />
+      <BackToTop />
     </>
   );
 }

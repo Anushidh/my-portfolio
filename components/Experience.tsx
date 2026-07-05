@@ -5,79 +5,56 @@ import TechBadge from "./TechBadge";
 interface ExperienceItem {
   date: string;
   role: string;
-  org?: string;
-  description: string;
-  tags: string[];
-  type: "work" | "project" | "learning" | "open-source";
+  org: string;
+  location: string;
+  context: string;
+  stack: string[];
+  bullets: string[];
+  type: "work" | "learning";
 }
 
 const experiences: ExperienceItem[] = [
   {
-    date: "2024 — Present",
-    role: "Full Stack Developer",
-    org: "Freelance & Personal Projects",
-    description:
-      "Designing and building full-stack applications end-to-end — from database schema design and API architecture to UI implementation and deployment. Focused on production-grade code quality, scalability, and clean developer experience.",
-    tags: ["React", "Node.js", "TypeScript", "MongoDB", "Redis"],
+    date: "Jan 2026 – Jun 2026",
+    role: "MERN Stack Developer",
+    org: "Accorelate",
+    location: "Remote",
+    context: "AI-powered billing & accounting platform built for India's MSMEs and SMEs",
+    stack: ["React.js", "Node.js", "Fastify", "TypeScript", "PostgreSQL"],
+    bullets: [
+      "Developing and maintaining features for a voice-enabled, AI-powered billing and accounting platform targeting India's MSME and SME segment.",
+      "Building responsive React.js frontend components with TypeScript, enabling GST-compliant invoicing, cash flow tracking, and inventory management modules.",
+      "Designing and integrating RESTful APIs using Node.js and Fastify to support real-time financial data processing and smart reminders.",
+      "Collaborating on a scalable backend architecture to handle multi-role users including retailers, freelancers, manufacturers, and wholesalers.",
+      "Contributing to features such as udhaar (credit) tracking, team expense management, and compliance workflows aligned with Indian GST standards.",
+    ],
     type: "work",
   },
   {
-    date: "2024",
-    role: "Pulse Commerce",
-    org: "Personal Project",
-    description:
-      "Built a full-featured e-commerce platform with JWT auth, Redis caching, inventory management, Razorpay payments, and a comprehensive admin dashboard. Designed to handle concurrent purchase conflicts and real-world edge cases.",
-    tags: ["React", "Express", "MongoDB", "Redis", "Razorpay"],
-    type: "project",
-  },
-  {
-    date: "2024",
-    role: "CareerHub",
-    org: "Personal Project",
-    description:
-      "Developed a dual-role job portal with separate employer and candidate dashboards, cursor-based pagination, full-text search, and a notification system. Built with a strong emphasis on API design and state management architecture.",
-    tags: ["React", "TypeScript", "Express", "MongoDB"],
-    type: "project",
-  },
-  {
-    date: "2024",
-    role: "ConnectSphere",
-    org: "Personal Project",
-    description:
-      "Created a social media platform with realtime chat, stories, infinite scroll, and a Socket.IO notification system. First project using Angular at scale — learned a lot about reactive state and RxJS patterns.",
-    tags: ["Angular", "Socket.IO", "Node.js", "MongoDB"],
-    type: "project",
-  },
-  {
-    date: "2023 — 2024",
-    role: "Backend Engineering Deep Dive",
-    description:
-      "Self-directed study of systems design, distributed systems patterns, and backend architecture. Explored topics including database indexing, caching strategies, message queues, and horizontal scaling.",
-    tags: ["Systems Design", "Databases", "Caching", "Architecture"],
-    type: "learning",
-  },
-  {
-    date: "2023",
-    role: "Frontend Foundations",
-    description:
-      "Built the foundations in React, TypeScript, and modern JavaScript. Completed projects ranging from UI component libraries to data-fetching patterns and client-side state management.",
-    tags: ["React", "TypeScript", "JavaScript", "CSS"],
+    date: "Nov 2023 – Apr 2025",
+    role: "Self-Taught ME(A)RN Stack Developer",
+    org: "Brototype (Brocamp)",
+    location: "Kochi, Kerala",
+    context: "Kerala's No.1 Software Training Institute | 16-month intensive, project-based, self-learning program",
+    stack: ["MongoDB", "Express.js", "React.js", "Angular", "NestJS", "Node.js", "TypeScript", "PostgreSQL"],
+    bullets: [
+      "Completed a 16-month intensive, self-paced MERN stack development program at Brototype — Kerala's leading software training institute partnered with NCVET, Skill India, and IT NASSCOM.",
+      "Built and deployed 4 full-stack applications independently, covering e-commerce, social media, job portals, and authentication systems from scratch.",
+      "Mastered the full JavaScript ecosystem including React.js, Angular, Node.js, Express.js, NestJS, MongoDB, TypeScript, Redux Toolkit, JWT, and cloud deployment.",
+      "Applied industry-standard practices including clean architecture, REST API design, CI/CD pipelines, Docker, and NGINX configuration.",
+    ],
     type: "learning",
   },
 ];
 
 const typeColors: Record<ExperienceItem["type"], string> = {
   work: "#0F766E",
-  project: "#0369A1",
   learning: "#7C3AED",
-  "open-source": "#B45309",
 };
 
 const typeLabels: Record<ExperienceItem["type"], string> = {
   work: "Work",
-  project: "Project",
-  learning: "Learning",
-  "open-source": "Open Source",
+  learning: "Training",
 };
 
 export default function Experience() {
@@ -120,12 +97,7 @@ export default function Experience() {
         </div>
       </FadeIn>
 
-      <div
-        style={{
-          position: "relative",
-          paddingLeft: "1.5rem",
-        }}
-      >
+      <div style={{ position: "relative", paddingLeft: "1.5rem" }}>
         {/* Timeline line */}
         <div
           style={{
@@ -141,13 +113,7 @@ export default function Experience() {
 
         {experiences.map((exp, i) => (
           <FadeIn key={`${exp.role}-${i}`} delay={0.06 * i}>
-            <div
-              style={{
-                position: "relative",
-                marginBottom: "3rem",
-                paddingBottom: i < experiences.length - 1 ? "0" : "0",
-              }}
-            >
+            <div style={{ position: "relative", marginBottom: "3.5rem" }}>
               {/* Timeline dot */}
               <div
                 style={{
@@ -164,13 +130,14 @@ export default function Experience() {
                 aria-hidden="true"
               />
 
-              {/* Date + type */}
+              {/* Date + type badge */}
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   gap: "0.75rem",
-                  marginBottom: "0.35rem",
+                  marginBottom: "0.4rem",
+                  flexWrap: "wrap",
                 }}
               >
                 <span
@@ -198,48 +165,91 @@ export default function Experience() {
                 >
                   {typeLabels[exp.type]}
                 </span>
+                <span
+                  style={{
+                    fontSize: "0.8125rem",
+                    color: "var(--color-text-muted)",
+                    fontFamily: "var(--font-mono)",
+                  }}
+                >
+                  {exp.location}
+                </span>
               </div>
 
-              {/* Role */}
+              {/* Role + org */}
               <h3
                 style={{
                   fontFamily: "var(--font-heading)",
                   fontSize: "1.25rem",
                   fontWeight: 400,
                   letterSpacing: "-0.01em",
-                  marginBottom: exp.org ? "0.15rem" : "0.75rem",
+                  marginBottom: "0.15rem",
                 }}
               >
                 {exp.role}
               </h3>
-
-              {exp.org && (
-                <p
-                  style={{
-                    fontSize: "0.875rem",
-                    color: "var(--color-text-muted)",
-                    marginBottom: "0.75rem",
-                  }}
-                >
-                  {exp.org}
-                </p>
-              )}
-
-              {/* Description */}
               <p
                 style={{
                   fontSize: "0.9375rem",
-                  lineHeight: 1.75,
-                  color: "var(--color-text-secondary)",
-                  marginBottom: "1rem",
+                  color: "var(--color-accent)",
+                  marginBottom: "0.4rem",
+                  fontWeight: 500,
                 }}
               >
-                {exp.description}
+                {exp.org}
+              </p>
+              <p
+                style={{
+                  fontSize: "0.875rem",
+                  color: "var(--color-text-muted)",
+                  marginBottom: "1rem",
+                  fontStyle: "italic",
+                }}
+              >
+                {exp.context}
               </p>
 
-              {/* Tags */}
+              {/* Bullets */}
+              <ul
+                style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: "0 0 1rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.5rem",
+                }}
+              >
+                {exp.bullets.map((bullet, j) => (
+                  <li
+                    key={j}
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "0.6rem",
+                      fontSize: "0.9375rem",
+                      lineHeight: 1.7,
+                      color: "var(--color-text-secondary)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "var(--color-accent)",
+                        flexShrink: 0,
+                        marginTop: "0.45rem",
+                        fontSize: "0.4rem",
+                      }}
+                    >
+                      ◆
+                    </span>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Stack */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
-                {exp.tags.map((tag) => (
+                {exp.stack.map((tag) => (
                   <TechBadge key={tag} label={tag} />
                 ))}
               </div>

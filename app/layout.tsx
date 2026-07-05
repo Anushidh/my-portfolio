@@ -24,18 +24,21 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Anushidh — Software Engineer",
+    default: "Anushidh — Full Stack Developer",
     template: "%s | Anushidh",
   },
   description:
-    "Software engineer specializing in scalable web applications with React, Angular, NestJS, Express, TypeScript, and MongoDB.",
+    "Full stack developer specializing in scalable web applications with React, Angular, NestJS, Express, Fastify, TypeScript, MongoDB, and PostgreSQL.",
   keywords: [
-    "software engineer",
     "full stack developer",
+    "software engineer",
     "React",
+    "Angular",
+    "NestJS",
     "Node.js",
     "TypeScript",
     "MongoDB",
+    "PostgreSQL",
   ],
   authors: [{ name: "Anushidh" }],
   creator: "Anushidh",
@@ -44,15 +47,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://anushidh.dev",
     siteName: "Anushidh",
-    title: "Anushidh — Software Engineer",
+    title: "Anushidh — Full Stack Developer",
     description:
-      "Software engineer specializing in scalable web applications with React, Angular, NestJS, Express, TypeScript, and MongoDB.",
+      "Full stack developer specializing in scalable web applications with React, Angular, NestJS, Express, Fastify, TypeScript, MongoDB, and PostgreSQL.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anushidh — Software Engineer",
+    title: "Anushidh — Full Stack Developer",
     description:
-      "Software engineer specializing in scalable web applications with React, Angular, NestJS, Express, TypeScript, and MongoDB.",
+      "Full stack developer specializing in scalable web applications with React, Angular, NestJS, Express, Fastify, TypeScript, MongoDB, and PostgreSQL.",
     creator: "@anushidh",
   },
   robots: {
