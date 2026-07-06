@@ -143,7 +143,7 @@ const projects: Project[] = [
       { label: "Frontend", href: "https://github.com/Anushidh/JOB-PLATFORM-FRONTEND" },
       { label: "Backend",  href: "https://github.com/Anushidh/JOB-PLATFORM-BACKEND" },
     ],
-    demo: "https://hireflow-demo-placeholder.vercel.app",
+    demo: "https://job-platform-frontend-phi.vercel.app",
     accentColor: "#0F766E",
   },
   {
