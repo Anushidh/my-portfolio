@@ -34,7 +34,7 @@ function LinkedinIcon({ size = 16 }: { size?: number }) {
 
 const socialLinks = [
   {
-    href: "/resume.pdf",
+    href: "/Anush_resume.pdf",
     label: "Resume",
     icon: FileText,
     external: true,
