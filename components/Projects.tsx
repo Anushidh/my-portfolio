@@ -89,7 +89,7 @@ const projects: Project[] = [
       { label: "Frontend", href: "https://github.com/Anushidh/E-COMMERCE-FRONTEND" },
       { label: "Backend",  href: "https://github.com/Anushidh/E-COMMERCE-BACKEND" },
     ],
-    demo: "https://wearhaus.vercel.app",
+    demo: "https://e-commerce-frontend-theta-lyart.vercel.app/",
     accentColor: "#0F766E",
   },
   {
