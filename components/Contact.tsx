@@ -42,7 +42,7 @@ const contactLinks = [
   {
     label: "Resume",
     value: "Download PDF",
-    href: "/resume.pdf",
+    href: "/Anush_resume.pdf",
     icon: FileText,
     external: true,
   },
