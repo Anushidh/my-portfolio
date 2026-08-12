@@ -139,7 +139,7 @@ export default function Hero() {
           marginBottom: "0.75rem",
         }}
       >
-        I build scalable web applications with React, Angular, NestJS, Express,
+        I build scalable web applications with React, NextJS, Angular, NestJS, Express,
         Fastify, TypeScript, MongoDB, and PostgreSQL.
       </motion.p>
 
