@@ -1,8 +1,20 @@
 import { groq } from "@ai-sdk/groq";
-import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import {
+  convertToModelMessages,
+  createUIMessageStreamResponse,
+  streamText,
+  toUIMessageStream,
+  type UIMessage,
+} from "ai";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
+
+// Chat model. Overridable via env so a Groq model retirement can be fixed by
+// changing GROQ_CHAT_MODEL in the host's env settings — no code deploy needed.
+// Known-good free Groq alternatives if the default is retired:
+//   openai/gpt-oss-120b, qwen/qwen3.8-27b
+const CHAT_MODEL = process.env.GROQ_CHAT_MODEL ?? "openai/gpt-oss-20b";
 
 const systemPrompt = `You are Anushidh's AI assistant, embedded directly into his personal portfolio website. 
 Your goal is to answer questions from recruiters and developers about Anushidh's experience, skills, and projects.
@@ -52,7 +64,7 @@ export async function POST(req: Request) {
 
     const result = streamText({
       // Free, fast model served by Groq. Requires a free GROQ_API_KEY.
-      model: groq("openai/gpt-oss-20b"),
+      model: groq(CHAT_MODEL),
       system: systemPrompt,
       messages: await convertToModelMessages(messages),
       onError: ({ error }) => {
@@ -60,20 +72,23 @@ export async function POST(req: Request) {
       },
     });
 
-    return result.toUIMessageStreamResponse({
-      onError: (error) => {
-        // Always log the full error server-side for debugging.
-        const ref = crypto.randomUUID().slice(0, 8);
-        console.error(`Chat stream error [${ref}]:`, error);
+    return createUIMessageStreamResponse({
+      stream: toUIMessageStream({
+        stream: result.stream,
+        onError: (error) => {
+          // Always log the full error server-side for debugging.
+          const ref = crypto.randomUUID().slice(0, 8);
+          console.error(`Chat stream error [${ref}]:`, error);
 
-        // In development, surface the real message to speed up debugging.
-        // In production, return a friendly message so provider/internal
-        // details are never leaked to visitors — the ref links to the log.
-        if (process.env.NODE_ENV === "development") {
-          return error instanceof Error ? error.message : String(error);
-        }
-        return `Sorry, something went wrong on our end. Please try again. (ref: ${ref})`;
-      },
+          // In development, surface the real message to speed up debugging.
+          // In production, return a friendly message so provider/internal
+          // details are never leaked to visitors — the ref links to the log.
+          if (process.env.NODE_ENV === "development") {
+            return error instanceof Error ? error.message : String(error);
+          }
+          return `Sorry, something went wrong on our end. Please try again. (ref: ${ref})`;
+        },
+      }),
     });
   } catch (error) {
     console.error("Chat API error:", error);

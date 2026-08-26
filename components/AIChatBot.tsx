@@ -24,6 +24,19 @@ export default function AIChatBot() {
     setInput("");
   };
 
+  // Clickable starter prompts shown in the empty state to guide visitors.
+  const starters = [
+    "What's his tech stack?",
+    "Tell me about his projects",
+    "Show me a live demo",
+    "Is he available for hire?",
+  ];
+
+  const handleStarter = (text: string) => {
+    if (isLoading) return;
+    sendMessage({ text });
+  };
+
   // Auto-scroll to bottom of chat
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -217,6 +230,47 @@ export default function AIChatBot() {
                   <MessageSquare size={32} style={{ margin: "0 auto 1rem", opacity: 0.5 }} />
                   <p>Hi! I&apos;m an AI trained on Anushidh&apos;s resume and experience.</p>
                   <p style={{ marginTop: "0.5rem" }}>Ask me anything about his skills or projects!</p>
+
+                  {/* Starter prompts */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "0.5rem",
+                      justifyContent: "center",
+                      marginTop: "1.5rem",
+                    }}
+                  >
+                    {starters.map((s) => (
+                      <button
+                        key={s}
+                        type="button"
+                        onClick={() => handleStarter(s)}
+                        disabled={isLoading}
+                        style={{
+                          padding: "0.45rem 0.85rem",
+                          fontSize: "0.8rem",
+                          fontFamily: "var(--font-body)",
+                          color: "var(--color-accent)",
+                          backgroundColor: "color-mix(in srgb, var(--color-accent) 8%, transparent)",
+                          border: "1px solid color-mix(in srgb, var(--color-accent) 25%, transparent)",
+                          borderRadius: "16px",
+                          cursor: isLoading ? "not-allowed" : "pointer",
+                          transition: "background-color 0.2s ease",
+                        }}
+                        onMouseOver={(e) =>
+                          (e.currentTarget.style.backgroundColor =
+                            "color-mix(in srgb, var(--color-accent) 16%, transparent)")
+                        }
+                        onMouseOut={(e) =>
+                          (e.currentTarget.style.backgroundColor =
+                            "color-mix(in srgb, var(--color-accent) 8%, transparent)")
+                        }
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
               
