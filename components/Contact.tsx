@@ -106,17 +106,7 @@ export default function Contact() {
         </p>
       </FadeIn>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: "1px",
-          backgroundColor: "var(--color-border)",
-          border: "1px solid var(--color-border)",
-          borderRadius: "12px",
-          overflow: "hidden",
-        }}
-      >
+      <div className="contact-grid">
         {contactLinks.map((link, i) => {
           const Icon = link.icon;
           return (

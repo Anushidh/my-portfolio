@@ -135,3 +135,19 @@ code, pre, kbd {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-hover);
 }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background-color: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
