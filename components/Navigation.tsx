@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "#about",      label: "About" },
@@ -74,8 +73,8 @@ export default function Navigation() {
           right: 0,
           zIndex: 50,
           backgroundColor: scrolled
-            ? "var(--color-nav-bg-scrolled)"
-            : "var(--color-nav-bg)",
+            ? "rgba(250, 250, 247, 0.92)"
+            : "rgba(250, 250, 247, 0.80)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           borderBottom: `1px solid ${scrolled ? "var(--color-border)" : "transparent"}`,
@@ -124,35 +123,32 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-            <ul style={{ display: "flex", alignItems: "center", gap: "2rem", listStyle: "none" }}>
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.href;
-                return (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      className="link-underline"
-                      style={{
-                        fontSize: "1rem",
-                        color: isActive ? "var(--color-accent)" : "var(--color-text-secondary)",
-                        textDecoration: "none",
-                        fontFamily: "var(--font-body)",
-                        fontWeight: isActive ? 500 : 400,
-                        transition: "color 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => { if (!isActive) (e.target as HTMLElement).style.color = "var(--color-text-primary)"; }}
-                      onMouseLeave={(e) => { if (!isActive) (e.target as HTMLElement).style.color = "var(--color-text-secondary)"; }}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-            <ThemeToggle />
-          </div>
+          <ul className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: "2rem", listStyle: "none" }}>
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="link-underline"
+                    style={{
+                      fontSize: "1rem",
+                      color: isActive ? "var(--color-accent)" : "var(--color-text-secondary)",
+                      textDecoration: "none",
+                      fontFamily: "var(--font-body)",
+                      fontWeight: isActive ? 500 : 400,
+                      transition: "color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => { if (!isActive) (e.target as HTMLElement).style.color = "var(--color-text-primary)"; }}
+                    onMouseLeave={(e) => { if (!isActive) (e.target as HTMLElement).style.color = "var(--color-text-secondary)"; }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
 
           {/* Hamburger */}
           <button
@@ -220,8 +216,6 @@ export default function Navigation() {
           <span style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", letterSpacing: "-0.01em" }}>
             Anushidh
           </span>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <ThemeToggle />
           <button
             onClick={() => setMenuOpen(false)}
             aria-label="Close menu"
@@ -264,7 +258,6 @@ export default function Navigation() {
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
-          </div>
         </div>
 
         {/* Nav links */}
