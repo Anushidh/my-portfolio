@@ -57,7 +57,7 @@ export default function Contact() {
       style={{
         maxWidth: "1100px",
         margin: "0 auto",
-        padding: "0 2rem 7rem",
+        padding: "0 2rem 3rem",
       }}
     >
       <FadeIn>
@@ -177,16 +177,15 @@ export default function Contact() {
         })}
       </div>
 
-      <div className="flex flex-col gap-6" style={{ marginTop: "4rem" }}>
+      <div className="flex flex-col gap-6" style={{ marginTop: "2.5rem" }}>
         <TerminalQuote />
       </div>
 
       <FadeIn delay={0.4}>
-        <div style={{ marginTop: "6rem", textAlign: "center" }}>
+        <div style={{ marginTop: "2.5rem", textAlign: "center" }}>
           <p
             style={{
               fontFamily: "var(--font-instrument-serif)",
-              fontStyle: "italic",
               fontSize: "2.25rem",
               color: "var(--color-text-primary)",
               opacity: 0.9,
@@ -196,11 +195,10 @@ export default function Contact() {
           </p>
           <p
             style={{
-              fontFamily: "var(--font-caveat)",
-              fontSize: "3rem",
+              fontFamily: "var(--font-instrument-serif)",
+              fontSize: "2rem",
               color: "var(--color-accent)",
               marginTop: "0.5rem",
-              fontWeight: 500,
             }}
           >
             Anushidh
