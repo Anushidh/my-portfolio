@@ -181,30 +181,6 @@ export default function Contact() {
         <TerminalQuote />
       </div>
 
-      <FadeIn delay={0.4}>
-        <div style={{ marginTop: "2.5rem", textAlign: "center" }}>
-          <p
-            style={{
-              fontFamily: "var(--font-instrument-serif)",
-              fontSize: "2.25rem",
-              color: "var(--color-text-primary)",
-              opacity: 0.9,
-            }}
-          >
-            Let&apos;s build something great together.
-          </p>
-          <p
-            style={{
-              fontFamily: "var(--font-instrument-serif)",
-              fontSize: "2rem",
-              color: "var(--color-accent)",
-              marginTop: "0.5rem",
-            }}
-          >
-            Anushidh
-          </p>
-        </div>
-      </FadeIn>
     </section>
   );
 }
