@@ -10,6 +10,10 @@ export default function AIChatBot() {
   const [input, setInput] = useState("");
   const { messages, sendMessage, status, error } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const fabRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
 
   const isLoading = status === "submitted" || status === "streaming";
 
@@ -27,10 +31,64 @@ export default function AIChatBot() {
     }
   }, [messages]);
 
+  // Accessibility: auto-focus input, Escape to close, and trap Tab focus
+  // within the dialog while it is open.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Focus the input once the open animation has begun.
+    const focusTimer = setTimeout(() => inputRef.current?.focus(), 100);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setIsOpen(false);
+        return;
+      }
+
+      if (e.key === "Tab" && modalRef.current) {
+        const focusable = Array.from(
+          modalRef.current.querySelectorAll<HTMLElement>(
+            'button:not([disabled]), [href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          )
+        ).filter((el) => el.offsetParent !== null);
+
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement as HTMLElement | null;
+
+        if (e.shiftKey && active === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      clearTimeout(focusTimer);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
+  // Return focus to the launcher button when the dialog closes.
+  useEffect(() => {
+    if (wasOpen.current && !isOpen) {
+      fabRef.current?.focus();
+    }
+    wasOpen.current = isOpen;
+  }, [isOpen]);
+
   return (
     <>
       {/* Floating Action Button */}
       <motion.button
+        ref={fabRef}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 200, damping: 20 }}
@@ -62,6 +120,10 @@ export default function AIChatBot() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Ask Anushidh's AI assistant"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -120,6 +182,7 @@ export default function AIChatBot() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
+                aria-label="Close chat"
                 style={{
                   background: "none",
                   border: "none",
@@ -242,9 +305,11 @@ export default function AIChatBot() {
               }}
             >
               <input
+                ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about Anushidh..."
+                aria-label="Ask about Anushidh"
                 style={{
                   flex: 1,
                   padding: "0.75rem 1rem",
@@ -260,6 +325,7 @@ export default function AIChatBot() {
               />
               <button
                 type="submit"
+                aria-label="Send message"
                 disabled={isLoading || !input.trim()}
                 style={{
                   width: "42px",
