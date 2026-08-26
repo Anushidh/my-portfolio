@@ -19,9 +19,10 @@ export default function BackToTop() {
       aria-label="Back to top"
       style={{
         position: "fixed",
-        bottom: "1.75rem",
-        right: "1.75rem",
-        zIndex: 99,
+        // Sits at the bottom, below the chat FAB.
+        bottom: "2rem",
+        right: "calc(2rem + 8px)",
+        zIndex: 9998,
         width: "40px",
         height: "40px",
         borderRadius: "10px",
