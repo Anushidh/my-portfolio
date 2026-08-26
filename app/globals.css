@@ -56,7 +56,8 @@ code, pre, kbd {
 }
 
 ::selection {
-  background-color: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  background-color: var(--color-accent);
+  color: var(--color-surface);
 }
 
 /* Animated underline */
@@ -128,9 +129,9 @@ code, pre, kbd {
   background: var(--color-background);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
+  background: var(--color-accent);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted);
+  background: var(--color-accent-hover);
 }
