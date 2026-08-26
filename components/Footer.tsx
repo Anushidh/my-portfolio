@@ -3,7 +3,6 @@ export default function Footer() {
     <footer
       style={{
         borderTop: "1px solid var(--color-border)",
-        padding: "3rem 2rem",
         marginTop: "7rem",
       }}
     >
@@ -11,9 +10,12 @@ export default function Footer() {
         style={{
           maxWidth: "1100px",
           margin: "0 auto",
+          padding: "3rem 2rem",
           display: "flex",
-          flexDirection: "column",
-          gap: "0.5rem",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "1rem",
         }}
       >
         <p
