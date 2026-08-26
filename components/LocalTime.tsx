@@ -29,7 +29,7 @@ export default function LocalTime() {
       <div
         style={{
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
           gap: "0.6rem",
         }}
       >
@@ -41,6 +41,8 @@ export default function LocalTime() {
             borderRadius: "50%",
             backgroundColor: "var(--color-accent)",
             boxShadow: "0 0 8px var(--color-accent)",
+            marginTop: "0.55rem",
+            flexShrink: 0,
           }}
         />
         <p style={{ fontSize: "1rem", color: "var(--color-text-secondary)", fontFamily: "var(--font-mono)" }}>
