@@ -1,6 +1,8 @@
 import FadeIn from "./FadeIn";
 import SectionDivider from "./SectionDivider";
 import { Mail, FileText } from "lucide-react";
+import TerminalQuote from "./TerminalQuote";
+import LocalTime from "./LocalTime";
 
 function GithubIcon({ size = 16 }: { size?: number }) {
   return (
@@ -106,6 +108,10 @@ export default function Contact() {
         </p>
       </FadeIn>
 
+      <div style={{ marginBottom: "2rem" }}>
+        <LocalTime />
+      </div>
+
       <div className="contact-grid">
         {contactLinks.map((link, i) => {
           const Icon = link.icon;
@@ -170,6 +176,37 @@ export default function Contact() {
           );
         })}
       </div>
+
+      <div className="flex flex-col gap-6" style={{ marginTop: "4rem" }}>
+        <TerminalQuote />
+      </div>
+
+      <FadeIn delay={0.4}>
+        <div style={{ marginTop: "6rem", textAlign: "center" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-instrument-serif)",
+              fontStyle: "italic",
+              fontSize: "2.25rem",
+              color: "var(--color-text-primary)",
+              opacity: 0.9,
+            }}
+          >
+            Let&apos;s build something great together.
+          </p>
+          <p
+            style={{
+              fontFamily: "var(--font-caveat)",
+              fontSize: "3rem",
+              color: "var(--color-accent)",
+              marginTop: "0.5rem",
+              fontWeight: 500,
+            }}
+          >
+            Anushidh
+          </p>
+        </div>
+      </FadeIn>
     </section>
   );
 }

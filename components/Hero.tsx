@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FileText, Mail } from "lucide-react";
+import StatusSlider from "./StatusSlider";
 
 // Custom SVG icons for brands not in this lucide version
 function GithubIcon({ size = 16 }: { size?: number }) {
@@ -67,11 +68,13 @@ export default function Hero() {
   return (
     <section
       style={{
-        paddingTop: "140px",
-        paddingBottom: "7rem",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
         maxWidth: "1100px",
         margin: "0 auto",
-        padding: "140px 2rem 7rem",
+        padding: "0 2rem",
       }}
     >
       {/* Availability badge */}
@@ -215,6 +218,14 @@ export default function Hero() {
             </a>
           );
         })}
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+      >
+        <StatusSlider />
       </motion.div>
     </section>
   );
