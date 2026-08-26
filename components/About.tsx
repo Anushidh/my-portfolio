@@ -6,7 +6,7 @@ export default function About() {
     <section
       id="about"
       style={{
-        maxWidth: "760px",
+        maxWidth: "1100px",
         margin: "0 auto",
         padding: "0 2rem 7rem",
       }}

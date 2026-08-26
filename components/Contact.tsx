@@ -53,7 +53,7 @@ export default function Contact() {
     <section
       id="contact"
       style={{
-        maxWidth: "760px",
+        maxWidth: "1100px",
         margin: "0 auto",
         padding: "0 2rem 7rem",
       }}
@@ -94,7 +94,7 @@ export default function Contact() {
             fontSize: "1.0625rem",
             lineHeight: 1.8,
             color: "var(--color-text-secondary)",
-            maxWidth: "560px",
+            maxWidth: "1100px",
             marginBottom: "3rem",
           }}
         >

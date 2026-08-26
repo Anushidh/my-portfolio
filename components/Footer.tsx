@@ -9,7 +9,7 @@ export default function Footer() {
     >
       <div
         style={{
-          maxWidth: "760px",
+          maxWidth: "1100px",
           margin: "0 auto",
           display: "flex",
           flexDirection: "column",

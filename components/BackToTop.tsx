@@ -25,9 +25,9 @@ export default function BackToTop() {
         width: "40px",
         height: "40px",
         borderRadius: "10px",
-        border: "1px solid var(--color-border)",
-        backgroundColor: "var(--color-surface)",
-        color: "var(--color-text-secondary)",
+        border: "none",
+        backgroundColor: "var(--color-accent)",
+        color: "#ffffff",
         cursor: "pointer",
         display: "flex",
         alignItems: "center",
@@ -36,15 +36,13 @@ export default function BackToTop() {
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
         pointerEvents: visible ? "auto" : "none",
-        transition: "opacity 0.3s ease, transform 0.3s ease",
+        transition: "opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease",
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--color-accent)";
-        (e.currentTarget as HTMLButtonElement).style.color = "var(--color-accent)";
+        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "var(--color-accent-hover)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--color-border)";
-        (e.currentTarget as HTMLButtonElement).style.color = "var(--color-text-secondary)";
+        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "var(--color-accent)";
       }}
     >
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"

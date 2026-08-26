@@ -133,7 +133,7 @@ export default function Navigation() {
                     onClick={(e) => handleNavClick(e, link.href)}
                     className="link-underline"
                     style={{
-                      fontSize: "0.875rem",
+                      fontSize: "1rem",
                       color: isActive ? "var(--color-accent)" : "var(--color-text-secondary)",
                       textDecoration: "none",
                       fontFamily: "var(--font-body)",

@@ -62,7 +62,7 @@ export default function Experience() {
     <section
       id="experience"
       style={{
-        maxWidth: "760px",
+        maxWidth: "1100px",
         margin: "0 auto",
         padding: "0 2rem 7rem",
       }}

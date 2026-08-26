@@ -642,7 +642,7 @@ export default function Projects() {
     <section
       id="projects"
       style={{
-        maxWidth: "760px",
+        maxWidth: "1100px",
         margin: "0 auto",
         padding: "0 2rem 7rem",
       }}

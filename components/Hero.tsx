@@ -69,7 +69,7 @@ export default function Hero() {
       style={{
         paddingTop: "140px",
         paddingBottom: "7rem",
-        maxWidth: "760px",
+        maxWidth: "1100px",
         margin: "0 auto",
         padding: "140px 2rem 7rem",
       }}
@@ -135,7 +135,7 @@ export default function Hero() {
           fontSize: "1.1875rem",
           lineHeight: 1.75,
           color: "var(--color-text-secondary)",
-          maxWidth: "620px",
+          maxWidth: "1100px",
           marginBottom: "0.75rem",
         }}
       >
@@ -151,7 +151,7 @@ export default function Hero() {
           fontSize: "1.1875rem",
           lineHeight: 1.75,
           color: "var(--color-text-secondary)",
-          maxWidth: "620px",
+          maxWidth: "1100px",
           marginBottom: "2.5rem",
         }}
       >

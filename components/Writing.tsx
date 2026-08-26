@@ -174,7 +174,7 @@ export default function Writing() {
     <section
       id="writing"
       style={{
-        maxWidth: "760px",
+        maxWidth: "1100px",
         margin: "0 auto",
         padding: "0 2rem 7rem",
       }}
@@ -210,7 +210,7 @@ export default function Writing() {
               fontSize: "1rem",
               color: "var(--color-text-secondary)",
               lineHeight: 1.7,
-              maxWidth: "540px",
+              maxWidth: "1100px",
               marginBottom: "1.5rem",
             }}
           >
