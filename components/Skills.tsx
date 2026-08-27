@@ -135,6 +135,7 @@ export default function Skills() {
               color: "var(--color-accent)",
               letterSpacing: "0.1em",
               textTransform: "uppercase",
+              fontWeight: 600,
               marginBottom: "1rem",
             }}
           >
@@ -185,6 +186,7 @@ export default function Skills() {
                   color: "var(--color-accent)",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
+                  fontWeight: 600,
                   marginBottom: "1rem",
                 }}
               >
