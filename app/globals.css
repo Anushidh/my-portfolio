@@ -107,6 +107,14 @@ code, pre, kbd {
   background-color: color-mix(in srgb, var(--color-accent) 4%, var(--color-surface)) !important;
 }
 
+/* Tech pills (TechBadge) hover */
+.tech-badge:hover {
+  color: var(--color-accent) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 45%, transparent) !important;
+  background-color: color-mix(in srgb, var(--color-accent) 8%, var(--color-surface)) !important;
+  transform: translateY(-1px);
+}
+
 .not-found-btn {
   transition: opacity 0.2s ease;
 }
