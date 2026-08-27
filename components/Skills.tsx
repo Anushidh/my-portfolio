@@ -53,6 +53,7 @@ const skillCategories = [
       "Mongoose",
       "Prisma",
       "Vector DB",
+      "Qdrant",
     ],
   },
   {
