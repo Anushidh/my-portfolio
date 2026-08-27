@@ -52,6 +52,7 @@ const skillCategories = [
       "Sequelize",
       "Mongoose",
       "Prisma",
+      "Vector DB",
     ],
   },
   {
@@ -72,6 +73,7 @@ const skillCategories = [
       "OpenAI API",
       "Gemini API",
       "LangChain",
+      "LangGraph",
       "Vercel AI SDK",
       "RAG",
       "Prompt Engineering",
