@@ -126,7 +126,8 @@ export default function Hero() {
           marginBottom: "1.5rem",
         }}
       >
-        Hi, I&apos;m Anushidh.
+        Hi, I&apos;m Anushidh.{" "}
+        <span style={{ color: "var(--color-accent)", fontSize: "0.55em", verticalAlign: "middle" }}>AI Full Stack Developer.</span>
       </motion.h1>
 
       {/* Description */}
@@ -143,7 +144,7 @@ export default function Hero() {
         }}
       >
         I build scalable web applications with React, NextJS, Angular, NestJS, Express,
-        Fastify, TypeScript, MongoDB, and PostgreSQL.
+        Fastify, FastAPI, Django, TypeScript, MongoDB, PostgreSQL, and Azure.
       </motion.p>
 
       <motion.p
