@@ -33,6 +33,7 @@ const skillCategories = [
       "Fastify",
       "NestJS",
       "FastAPI",
+      "Django",
       "REST",
       "GraphQL",
       "WebSockets",
@@ -86,6 +87,7 @@ const skillCategories = [
     skills: [
       "Linux",
       "AWS",
+      "Azure",
       "Docker",
       "Kubernetes",
       "Nginx",
