@@ -28,7 +28,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Anushidh — Full Stack Developer",
+    default: "Anushidh - Full Stack Developer",
     template: "%s | Anushidh",
   },
   description:
@@ -51,13 +51,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://my-portfolio-beta-ten-90.vercel.app",
     siteName: "Anushidh",
-    title: "Anushidh — Full Stack Developer",
+    title: "Anushidh - Full Stack Developer",
     description:
       "Full stack developer specializing in scalable web applications with React, Angular, NestJS, Express, Fastify, TypeScript, MongoDB, and PostgreSQL.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anushidh — Full Stack Developer",
+    title: "Anushidh - Full Stack Developer",
     description:
       "Full stack developer specializing in scalable web applications with React, Angular, NestJS, Express, Fastify, TypeScript, MongoDB, and PostgreSQL.",
     creator: "@anushidh",

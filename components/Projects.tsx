@@ -41,7 +41,7 @@ const projects: Project[] = [
     title: "Wearhaus",
     tagline: "Full stack e-commerce platform for a clothing store",
     description:
-      "A production-ready e-commerce platform covering the full shopping lifecycle — browse, cart, checkout, payments, order tracking, returns, and an admin dashboard with analytics. Built with a modern TypeScript stack and designed to handle real-world edge cases correctly.",
+      "A production-ready e-commerce platform covering the full shopping lifecycle - browse, cart, checkout, payments, order tracking, returns, and an admin dashboard with analytics. Built with a modern TypeScript stack and designed to handle real-world edge cases correctly.",
     stack: [
       "React",
       "TypeScript",
@@ -58,9 +58,9 @@ const projects: Project[] = [
     problem:
       "Most e-commerce tutorials stop at a simple product list and checkout. I wanted to build something that reflected what a real platform needs: atomic order placement across multiple resources, a wallet system that handles refunds and top-ups, coupons with race-condition-safe usage limits, and an admin dashboard that gives operators actual insight into the business.",
     architecture:
-      "The backend follows an MVC structure — routes, controllers, middleware, validators, and models — keeping each layer's responsibility clear. The frontend is organized into feature modules (auth, products, cart, orders, admin), with a shared layer for the API client, stores, and reusable components. Server state is managed by TanStack Query and local UI state by Zustand, keeping data-fetching logic out of components entirely.",
+      "The backend follows an MVC structure - routes, controllers, middleware, validators, and models - keeping each layer's responsibility clear. The frontend is organized into feature modules (auth, products, cart, orders, admin), with a shared layer for the API client, stores, and reusable components. Server state is managed by TanStack Query and local UI state by Zustand, keeping data-fetching logic out of components entirely.",
     challenges:
-      "Order placement runs inside a single MongoDB transaction — stock, coupon usage, wallet debit, and cart clearing either all commit or all roll back, with no partial state ever persisted. All monetary arithmetic uses Decimal.js throughout to avoid floating-point drift in discounts, totals, tax, and wallet calculations. On the frontend, the axios interceptor handles concurrent 401s with a queue and an in-flight lock so only one token refresh fires regardless of how many requests fail simultaneously.",
+      "Order placement runs inside a single MongoDB transaction - stock, coupon usage, wallet debit, and cart clearing either all commit or all roll back, with no partial state ever persisted. All monetary arithmetic uses Decimal.js throughout to avoid floating-point drift in discounts, totals, tax, and wallet calculations. On the frontend, the axios interceptor handles concurrent 401s with a queue and an in-flight lock so only one token refresh fires regardless of how many requests fail simultaneously.",
     keyFeatures: [
       "JWT access tokens (15 min) + HttpOnly cookie refresh rotation via Redis",
       "Google OAuth 2.0 with existing-account linking",
@@ -73,13 +73,13 @@ const projects: Project[] = [
       "Full-text search with multi-faceted filters",
       "Order cancellation and 15-day return window enforcement",
       "PDF invoice generation (PDFKit) emailed to customer",
-      "Admin dashboard — revenue stats, charts, top products",
+      "Admin dashboard - revenue stats, charts, top products",
       "Stale order cleanup cron job (auto-cancel unpaid Razorpay orders)",
       "Cart abandonment detection with reminder emails",
       "Referral system with atomic wallet reward on first delivery",
     ],
     lessons:
-      "The concurrent 401 case in the axios interceptor — queue and in-flight lock — was the most subtle piece to get right. And Decimal.js needs to be in from day one; floating-point drift in financial calculations is silent and painful to untangle after the fact.",
+      "The concurrent 401 case in the axios interceptor - queue and in-flight lock - was the most subtle piece to get right. And Decimal.js needs to be in from day one; floating-point drift in financial calculations is silent and painful to untangle after the fact.",
     metrics: [
       { label: "API endpoints", value: "60+" },
       { label: "DB collections", value: "12" },
@@ -111,29 +111,29 @@ const projects: Project[] = [
       "TanStack Query",
     ],
     problem:
-      "Job platforms tend to be either too simple (just listings and apply buttons) or too bloated. I wanted to build the full lifecycle correctly — post moderation, application status workflows, subscription-gated features, AI tooling that's actually useful, and cron jobs that handle the boring-but-critical stuff like auto-expiring subscriptions and sending job alerts.",
+      "Job platforms tend to be either too simple (just listings and apply buttons) or too bloated. I wanted to build the full lifecycle correctly - post moderation, application status workflows, subscription-gated features, AI tooling that's actually useful, and cron jobs that handle the boring-but-critical stuff like auto-expiring subscriptions and sending job alerts.",
     architecture:
-      "The backend uses a Controllers → Services → Repositories → Models layered structure with manual dependency injection wired in a single container.ts — no DI framework, just explicit construction that keeps the entire dependency graph visible in one file. The frontend is split into lazy-loaded portals per role (employee, employer, admin). TanStack Query owns all server state, Zustand handles auth and short-lived UI state like AI drafts. Route guards enforce role-based access at the router level.",
+      "The backend uses a Controllers → Services → Repositories → Models layered structure with manual dependency injection wired in a single container.ts - no DI framework, just explicit construction that keeps the entire dependency graph visible in one file. The frontend is split into lazy-loaded portals per role (employee, employer, admin). TanStack Query owns all server state, Zustand handles auth and short-lived UI state like AI drafts. Route guards enforce role-based access at the router level.",
     challenges:
-      "Subscription entitlement enforcement was the trickiest design problem — hardcoding feature checks across controllers causes drift fast. Solved with a requireSubscription(feature) middleware factory that reads the user's plan from Redis-cached subscription data, keeping all entitlement logic in one place. Socket.IO rooms are keyed by userId rather than socket ID so all open tabs for a user receive the same notifications without duplication logic in controllers.",
+      "Subscription entitlement enforcement was the trickiest design problem - hardcoding feature checks across controllers causes drift fast. Solved with a requireSubscription(feature) middleware factory that reads the user's plan from Redis-cached subscription data, keeping all entitlement logic in one place. Socket.IO rooms are keyed by userId rather than socket ID so all open tabs for a user receive the same notifications without duplication logic in controllers.",
     keyFeatures: [
       "JWT access + refresh rotation with Redis-backed revocation",
       "Google and LinkedIn OAuth with role selection",
-      "OTP-gated registration — user row only created after verification",
+      "OTP-gated registration - user row only created after verification",
       "Four subscription tiers with feature entitlements via middleware",
       "Razorpay billing with PDF invoice generation",
       "AI cover letter generation per job posting",
-      "AI resume parsing — PDF upload auto-fills profile fields",
+      "AI resume parsing - PDF upload auto-fills profile fields",
       "AI job match scoring (employee ↔ job, employer ↔ applicant)",
       "AI job description generator for employers",
       "Real-time messaging with typing indicators",
-      "Job alerts — daily/weekly email digests from saved filters",
-      "Job analytics — views, clicks, applications with daily charts",
+      "Job alerts - daily/weekly email digests from saved filters",
+      "Job analytics - views, clicks, applications with daily charts",
       "Cron jobs: job alerts, subscription expiry, auto-close past-deadline jobs",
-      "Admin panel — user management, job moderation, revenue tracking",
+      "Admin panel - user management, job moderation, revenue tracking",
     ],
     lessons:
-      "Manual dependency injection via a container.ts file is underrated. Having the entire wiring explicit in one place makes the dependency graph obvious and testing straightforward — no magic, no decorators, no surprises. I also learned that subscription entitlement logic needs to live in middleware, not scattered across controllers, or it becomes impossible to audit what each plan actually unlocks.",
+      "Manual dependency injection via a container.ts file is underrated. Having the entire wiring explicit in one place makes the dependency graph obvious and testing straightforward - no magic, no decorators, no surprises. I also learned that subscription entitlement logic needs to live in middleware, not scattered across controllers, or it becomes impossible to audit what each plan actually unlocks.",
     metrics: [
       { label: "User roles", value: "3" },
       { label: "DB models", value: "13" },
@@ -150,7 +150,7 @@ const projects: Project[] = [
     title: "ConnectSphere",
     tagline: "Full stack social media platform with real-time messaging",
     description:
-      "A full-featured social platform built with Angular and NestJS, covering the complete social graph — posts, stories, nested comments, real-time chat, notifications, and a private account follow-request flow.",
+      "A full-featured social platform built with Angular and NestJS, covering the complete social graph - posts, stories, nested comments, real-time chat, notifications, and a private account follow-request flow.",
     stack: [
       "Angular",
       "TypeScript",
@@ -164,11 +164,11 @@ const projects: Project[] = [
       "Passport.js",
     ],
     problem:
-      "I wanted to build a social platform that handled the parts most tutorials skip — private accounts with approval flows, token refresh race conditions across parallel requests, WebSocket authentication without standard Passport guards, and real-time presence that works correctly across multiple tabs.",
+      "I wanted to build a social platform that handled the parts most tutorials skip - private accounts with approval flows, token refresh race conditions across parallel requests, WebSocket authentication without standard Passport guards, and real-time presence that works correctly across multiple tabs.",
     architecture:
-      "The NestJS backend follows a layered structure — controllers handle HTTP, services contain business logic, and repositories handle data access via TypeORM. PostgreSQL is the primary store. Redis handles OTP storage with TTL (unverified registrations expire automatically), refresh token rotation, and session management. Real-time features use Socket.IO with separate namespaces for notifications and chat, with users joining personal rooms for targeted delivery.",
+      "The NestJS backend follows a layered structure - controllers handle HTTP, services contain business logic, and repositories handle data access via TypeORM. PostgreSQL is the primary store. Redis handles OTP storage with TTL (unverified registrations expire automatically), refresh token rotation, and session management. Real-time features use Socket.IO with separate namespaces for notifications and chat, with users joining personal rooms for targeted delivery.",
     challenges:
-      "The token refresh race condition is a classic social media problem — multiple in-flight requests all returning 401 simultaneously, each trying to refresh independently. Solved by serialising the refresh in the interceptor so only one fires and the rest wait. Real-time presence across multiple tabs is another one: naive socket-per-tab approaches double-count online status, so presence is tracked per-user rather than per-connection. Cross-domain HttpOnly cookies between Vercel and Render also needed careful SameSite=none + CORS credentials configuration to work correctly.",
+      "The token refresh race condition is a classic social media problem - multiple in-flight requests all returning 401 simultaneously, each trying to refresh independently. Solved by serialising the refresh in the interceptor so only one fires and the rest wait. Real-time presence across multiple tabs is another one: naive socket-per-tab approaches double-count online status, so presence is tracked per-user rather than per-connection. Cross-domain HttpOnly cookies between Vercel and Render also needed careful SameSite=none + CORS credentials configuration to work correctly.",
     keyFeatures: [
       "JWT access tokens + HttpOnly cookie refresh rotation via Redis",
       "Google and Facebook OAuth",
@@ -185,7 +185,7 @@ const projects: Project[] = [
       "Swagger API docs (60+ endpoints)",
     ],
     lessons:
-      "Private account logic needs to be enforced at the service layer, not just the UI — otherwise a determined user can hit the API directly and see posts they shouldn't. Notification fanout also compounds quickly: a post that gets 500 likes means 500 individual socket emits unless you batch or debounce. And Angular route ordering matters more than it looks — static routes like /post/create must come before dynamic ones like /post/:id, or Angular matches 'create' as an ID and loads the wrong component entirely.",
+      "Private account logic needs to be enforced at the service layer, not just the UI - otherwise a determined user can hit the API directly and see posts they shouldn't. Notification fanout also compounds quickly: a post that gets 500 likes means 500 individual socket emits unless you batch or debounce. And Angular route ordering matters more than it looks - static routes like /post/create must come before dynamic ones like /post/:id, or Angular matches 'create' as an ID and loads the wrong component entirely.",
     metrics: [
       { label: "API endpoints", value: "60+" },
       { label: "Socket namespaces", value: "2" },
@@ -527,7 +527,7 @@ function ProjectCard({
             </a>
           )}
 
-          {/* Split repos — dropdown */}
+          {/* Split repos - dropdown */}
           {project.githubRepos && (
             <div ref={repoRef} style={{ position: "relative" }}>
               <button

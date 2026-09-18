@@ -38,7 +38,7 @@ const experiences: ExperienceItem[] = [
     context: "Kerala's No.1 Software Training Institute | 16-month intensive, project-based, self-learning program",
     stack: ["MongoDB", "Express.js", "React.js", "Angular", "NestJS", "Node.js", "TypeScript", "PostgreSQL"],
     bullets: [
-      "Completed a 16-month intensive, self-paced MERN stack development program at Brototype — Kerala's leading software training institute partnered with NCVET, Skill India, and IT NASSCOM.",
+      "Completed a 16-month intensive, self-paced MERN stack development program at Brototype - Kerala's leading software training institute partnered with NCVET, Skill India, and IT NASSCOM.",
       "Built and deployed 4 full-stack applications independently, covering e-commerce, social media, job portals, and authentication systems from scratch.",
       "Mastered the full JavaScript ecosystem including React.js, Angular, Node.js, Express.js, NestJS, MongoDB, TypeScript, Redux Toolkit, JWT, and cloud deployment.",
       "Applied industry-standard practices including clean architecture, REST API design, CI/CD pipelines, Docker, and NGINX configuration.",

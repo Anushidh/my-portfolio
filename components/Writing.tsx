@@ -26,7 +26,7 @@ const articles: Article[] = [
   {
     title: "Lessons Learned Building a Realtime Chat App",
     excerpt:
-      "What I learned building ConnectSphere's chat system — covering Socket.IO room architecture, message delivery guarantees, and handling reconnection gracefully.",
+      "What I learned building ConnectSphere's chat system - covering Socket.IO room architecture, message delivery guarantees, and handling reconnection gracefully.",
     readTime: "6 min read",
     date: "Coming soon",
     tags: ["Realtime", "Socket.IO", "Architecture"],
@@ -36,7 +36,7 @@ const articles: Article[] = [
   {
     title: "How I Structure Express Applications",
     excerpt:
-      "My opinionated take on Express project structure — separating controllers, services, and repositories, and why the pattern scales better than route-heavy monoliths.",
+      "My opinionated take on Express project structure - separating controllers, services, and repositories, and why the pattern scales better than route-heavy monoliths.",
     readTime: "5 min read",
     date: "Coming soon",
     tags: ["Backend", "Express", "Architecture"],
@@ -46,7 +46,7 @@ const articles: Article[] = [
   {
     title: "Cursor-Based Pagination vs Offset: When It Matters",
     excerpt:
-      "Offset pagination breaks in real-world conditions. Here's exactly when cursor-based pagination is worth the added complexity — and how to implement it cleanly.",
+      "Offset pagination breaks in real-world conditions. Here's exactly when cursor-based pagination is worth the added complexity - and how to implement it cleanly.",
     readTime: "7 min read",
     date: "Coming soon",
     tags: ["Databases", "Performance", "API Design"],

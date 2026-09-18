@@ -51,11 +51,11 @@ export default function About() {
           >
             I stumbled into software through curiosity and never really stopped.
             What began as tinkering with scripts grew into a genuine interest in
-            how systems are designed — how data flows, how services scale, how
+            how systems are designed - how data flows, how services scale, how
             small architectural decisions compound over time. On the backend I
             think in layers: clean separation, maintainable code, schemas that
             survive requirement changes. On the frontend I care about feel as
-            much as function — the spacing, the transitions, whether a component
+            much as function - the spacing, the transitions, whether a component
             communicates its intent without explanation. I believe good
             engineering and good UX thinking are the same discipline, just
             applied at different levels of the stack.

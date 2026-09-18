@@ -11,8 +11,8 @@ export default function LoadingScreen() {
   const [removed, setRemoved] = useState(false);
 
   useEffect(() => {
-    const MIN_VISIBLE = 900; // ms — ensure the loader is seen, not a flash
-    const FADE = 450; // ms — matches the CSS transition below
+    const MIN_VISIBLE = 900; // ms - ensure the loader is seen, not a flash
+    const FADE = 450; // ms - matches the CSS transition below
     const start = performance.now();
     let fadeTimer: ReturnType<typeof setTimeout>;
     let removeTimer: ReturnType<typeof setTimeout>;

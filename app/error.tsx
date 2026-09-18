@@ -38,7 +38,7 @@ export default function Error({
             marginBottom: "1rem",
           }}
         >
-          500 — Error
+          500 - Error
         </p>
 
         {/* Heading */}
@@ -76,7 +76,7 @@ export default function Error({
           }}
         >
           An unexpected error occurred while rendering this page. It might be
-          temporary — try again, or head back home.
+          temporary - try again, or head back home.
         </p>
 
         {/* Optional error reference for support/debugging */}

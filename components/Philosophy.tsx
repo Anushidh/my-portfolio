@@ -52,15 +52,15 @@ export default function Philosophy() {
         {[
           {
             heading: "Code is read more than it's written",
-            body: "The most valuable thing you can do when writing code is make it obvious. Not clever, not dense — obvious. A future developer (often yourself) will read this code under pressure, and the kindness of clarity is worth more than the satisfaction of brevity.",
+            body: "The most valuable thing you can do when writing code is make it obvious. Not clever, not dense - obvious. A future developer (often yourself) will read this code under pressure, and the kindness of clarity is worth more than the satisfaction of brevity.",
           },
           {
             heading: "Architecture should reflect the problem",
-            body: "Over-engineering is just as harmful as under-engineering. I aim to choose architectures that fit the current problem while leaving room to grow. The best systems are designed with known constraints and honest uncertainty — not theoretical scale.",
+            body: "Over-engineering is just as harmful as under-engineering. I aim to choose architectures that fit the current problem while leaving room to grow. The best systems are designed with known constraints and honest uncertainty - not theoretical scale.",
           },
           {
             heading: "User-first interfaces",
-            body: "Frontend decisions aren't just engineering decisions — they're UX decisions. Every state, every loading indicator, every error message is a choice about how the user experiences the software. I build interfaces with that awareness.",
+            body: "Frontend decisions aren't just engineering decisions - they're UX decisions. Every state, every loading indicator, every error message is a choice about how the user experiences the software. I build interfaces with that awareness.",
           },
           {
             heading: "Performance is a feature",
@@ -68,11 +68,11 @@ export default function Philosophy() {
           },
           {
             heading: "Accessibility is non-negotiable",
-            body: "The web was designed for everyone. Building accessible software isn't extra work — it's part of doing the job properly. Semantic HTML, keyboard navigation, and screen reader support belong in every production application.",
+            body: "The web was designed for everyone. Building accessible software isn't extra work - it's part of doing the job properly. Semantic HTML, keyboard navigation, and screen reader support belong in every production application.",
           },
           {
             heading: "Learning is continuous",
-            body: "The technology landscape changes constantly, but the fundamentals — systems thinking, clean abstractions, honest tradeoffs — change slowly. I invest in both: staying current on the ecosystem while deepening my understanding of the principles underneath it.",
+            body: "The technology landscape changes constantly, but the fundamentals - systems thinking, clean abstractions, honest tradeoffs - change slowly. I invest in both: staying current on the ecosystem while deepening my understanding of the principles underneath it.",
           },
         ].map((item, i) => (
           <FadeIn key={item.heading} delay={0.06 * i}>

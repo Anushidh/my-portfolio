@@ -84,7 +84,7 @@ export default function WelcomeToast() {
             lineHeight: 1.5,
           }}
         >
-          Have a look around — and if something clicks, let&apos;s talk.
+          Have a look around - and if something clicks, let&apos;s talk.
         </p>
       </div>
       <button
