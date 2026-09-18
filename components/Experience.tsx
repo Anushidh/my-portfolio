@@ -15,7 +15,7 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    date: "Jan 2026 – Jun 2026",
+    date: "Jan 2026 - Jun 2026",
     role: "MERN Stack Developer",
     org: "Accorelate",
     location: "Remote",
@@ -31,7 +31,7 @@ const experiences: ExperienceItem[] = [
     type: "work",
   },
   {
-    date: "Nov 2023 – Apr 2025",
+    date: "Nov 2023 - Apr 2025",
     role: "Self-Taught ME(A)RN Stack Developer",
     org: "Brototype (Brocamp)",
     location: "Kochi, Kerala",

@@ -5,7 +5,7 @@ import FadeIn from "./FadeIn";
 
 const quotes = [
   "There are only two hard things in Computer Science: cache invalidation and naming things.",
-  "It's not a bug – it's an undocumented feature.",
+  "It's not a bug - it's an undocumented feature.",
   "First, solve the problem. Then, write the code.",
   "Talk is cheap. Show me the code.",
   "Programs must be written for people to read, and only incidentally for machines to execute.",
