@@ -127,7 +127,7 @@ export default function Hero() {
         }}
       >
         Hi, I&apos;m Anushidh.{" "}
-        <span style={{ color: "var(--color-accent)", fontSize: "0.55em", verticalAlign: "middle" }}>AI Full Stack Developer.</span>
+        <span className="block sm:inline-block mt-1 sm:mt-0" style={{ color: "var(--color-accent)", fontSize: "0.55em", verticalAlign: "middle" }}>AI Full Stack Developer.</span>
       </motion.h1>
 
       {/* Description */}
